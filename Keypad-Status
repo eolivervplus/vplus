@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locker Status Lights Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #0056b3;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+        .status-item:hover {
+            background-color: #e8f1ff;
+        }
+        .light-combo {
+            font-weight: bold;
+            color: #0056b3;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+        }
+        .status {
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: right;
+            padding-right: 20px;
+        }
+        .light-box {
+            display: flex;
+            margin-right: 15px;
+        }
+        .light {
+            width: 40px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 5px;
+            background-color: #ccc;
+        }
+        /* Light colors */
+        .green { background-color: green; }
+        .red { background-color: red; }
+        .yellow { background-color: GoldenRod; }
+        
+        /* Animations */
+        .solid { opacity: 1; }
+        .flash- { animation: flash 1.5s infinite; }
+        .flash-fast { animation: flash 0.5s infinite; }
+        
+        @keyframes flash {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+        
+        /* Description Panel */
+        .description {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -100px;
+            background: #f1f1f1;
+            padding: 10px;
+            transition: bottom 0.3s;
+            border-top: 1px solid #ddd;
+        }
+        .status-item.open .description {
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Locker Status Lights Guide</h1>
+    
+    <!-- Example Items -->
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light green solid"></div>
+            <div class="light green solid"></div>
+        </div>
+        <div class="status">Solid Green</div>
+        <div class="description">Indicates the locker is open and AVAILABLE to rent.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red solid"></div>
+            <div class="light red solid"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+        </div>
+        <div class="status">Solid Red</div>
+        <div class="description">Indicates the locker is rented.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red flash-"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+        </div>
+        <div class="status"> Flashing Red</div>
+        <div class="description">Indicates the locker is out of service (OOC).</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red flash-"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light green flash-"></div>
+        </div>
+        <div class="status"> Flashing Red & Green</div>
+        <div class="description">Indicates the rental is expired.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light off flash-fast green"></div>
+            <div class="light green flash-fast"></div>
+        </div>
+        <div class="status">Fast Flashing Green</div>
+        <div class="description">Indicates the locker was rented but not accessed.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light off flash- green"></div>
+            <div class="light green flash-"></div>
+        </div>
+        <div class="status"> Flashing Green</div>
+        <div class="description">Indicates the door is open on an available locker.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light yellow solid"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+        </div>
+        <div class="status">Steady Yellow</div>
+        <div class="description">Indicates keypad lost communication with server.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red solid"></div>
+            <div class="light red solid"></div>
+            <div class="light off"></div>
+            <div class="light green flash-"></div>
+        </div>
+        <div class="status">Solid Red & Flashing Green</div>
+        <div class="description">Indicates the door is opened on a rented locker.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light yellow flash-"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light yellow flash-"></div>
+        </div>
+        <div class="status"> Flashing Yellow</div>
+        <div class="description">Indicates there is a communication failure with the keypad.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light yellow flash-fast"></div>
+            <div class="light off"></div>
+            <div class="light off"></div>
+            <div class="light yellow flash-fast"></div>
+        </div>
+        <div class="status">Fast Flashing Yellow</div>
+        <div class="description">Indicates the keypad is ready to be addressed.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red flash-"></div>
+            <div class="light red flash-"></div>
+            <div class="light green flash-"></div>
+            <div class="light green flash-"></div>
+        </div>
+        <div class="status">Flashing Red & Green</div>
+        <div class="description">Indicates the entered PIN is incorrect or incomplete.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light red solid"></div>
+            <div class="light red solid"></div>
+            <div class="light off"></div>
+            <div class="light yellow flash-"></div>
+        </div>
+        <div class="status">Solid Red &  Flashing Yellow</div>
+        <div class="description">Indicates a key on the keypad is being pressed on a rented locker.</div>
+    </div>
+
+    <div class="status-item" onclick="this.classList.toggle('open')">
+        <div class="light-combo">
+            <div class="light yellow flash-"></div>
+            <div class="light off"></div>
+            <div class="light green solid"></div>
+            <div class="light green solid"></div>
+        </div>
+        <div class="status"> Flashing Yellow & Solid Green</div>
+        <div class="description">Indicates a key on the keypad is being pressed on an available locker.</div>
+    </div>
+
+</div>
+
+</body>
+</html>
